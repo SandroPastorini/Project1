@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container } from 'reactstrap';
+import { Col, Container, Row } from 'reactstrap';
 import { NavMenu } from './NavMenu';
 
 export class Layout extends Component {
@@ -7,14 +7,18 @@ export class Layout extends Component {
 
   render() {
       return (
-          <div className="container">
-              <div className="row">
-            <NavMenu />
-              <Container className="col-8">
+        <Container fluid='md'>
+          <Row>
+            <Col sm='2'>
+              <NavMenu />
+            </Col>
+            <Col>
+              <Container sm='10'>
                 {this.props.children}
-            </Container>
-              </div>
-      </div>
+              </Container>
+            </Col>
+          </Row>
+        </Container>
     );
   }
 }

@@ -22,10 +22,9 @@ export class NavMenu extends Component {
 
   render() {
       return (
-          <header className="col-2">
+          <header>
         <Navbar className="border-bottom border-right mb-3" ul container light>
-          <NavbarBrand tag={Link} to="/">Fakeflix</NavbarBrand>
-              <ul className="navbar-nav flex-column">
+            <ul className="navbar-nav flex-column">
               <NavItem  >
                 <NavLink tag={Link} className="text-dark" to="/" >Inicio</NavLink>
               </NavItem>
