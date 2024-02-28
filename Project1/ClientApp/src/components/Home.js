@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Button, Col, Container, Input, Nav, Pagination, PaginationItem, PaginationLink, Row } from 'reactstrap';
 import { MovieCard } from './MovieCard';
 import { getSearchResults } from './Home.service';
@@ -8,27 +8,37 @@ export class Home extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { movies: [], loading: true };
+    this.state = { 
+      movies: [],
+      loading: true,
+      inputValue: ''
+    };
   }
 
-  searchAction(event) {
-    const query = event.target.value
-    this.setState({
-      movies: getSearchResults(query),
-      loading: false
-    })
+  updateInputValue = (e) => {
+    this.setState({inputValue: e.target.value})
+  }
+
+  searchAction = (event) => {
+    const query = this.state.inputValue
+    getSearchResults(query)
+    .then(result => 
+      this.setState({
+        movies: result, 
+        loading: false
+      }))
   }
 
   movies = [
     {
       id: 1,
-      imgSrc: 'https://m.media-amazon.com/images/M/MV5BNGViZWZmM2EtNGYzZi00ZDAyLTk3ODMtNzIyZTBjN2Y1NmM1XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_.jpg',
+      imgUrl: 'https://m.media-amazon.com/images/M/MV5BNGViZWZmM2EtNGYzZi00ZDAyLTk3ODMtNzIyZTBjN2Y1NmM1XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_.jpg',
       title: 'pelicula',
       description: 'lorem ipsum dolor sit amet',
     },
     {
       id: 1,
-      imgSrc: 'https://m.media-amazon.com/images/M/MV5BNGViZWZmM2EtNGYzZi00ZDAyLTk3ODMtNzIyZTBjN2Y1NmM1XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_.jpg',
+      imgUrl: 'https://m.media-amazon.com/images/M/MV5BNGViZWZmM2EtNGYzZi00ZDAyLTk3ODMtNzIyZTBjN2Y1NmM1XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_.jpg',
       title: 'pelicula',
       description: 'lorem ipsum dolor sit amet',
     },
@@ -40,7 +50,7 @@ export class Home extends Component {
           <h1 className='text-center'>FakeFlix</h1>
           <Row>
             <Col sm='10'>
-              <Input id='searchField' type='text' className='form-control' placeholder='Película o serie' />
+              <Input  value={this.state.inputValue} onChange={this.updateInputValue} id='searchField' type='text' className='form-control' placeholder='Película o serie' />
             </Col>
             <Col sm='2'>
               <Button color='primary' onClick={this.searchAction}>Buscar</Button>
@@ -48,11 +58,13 @@ export class Home extends Component {
           </Row>
 
           <Row>
-            {this.state.movies.map(m => (
-            <Col sm='3' className='g-3'>
-              <MovieCard key={m.id} imgSrc={m.imgSrc} description={m.description} title={m.title} />
+            {
+            this.state.movies.length > 0 ? this.state.movies.map(m => (
+            <Col key={m.id} sm='3' className='g-3'>
+              <MovieCard key={m.id} imgUrl={m.imgUrl} description={m.description} title={m.title} />
             </Col>
-            ))}
+            )):''
+            }
           </Row>
 
           <Row className='my-4'>

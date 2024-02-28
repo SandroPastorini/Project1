@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button, Card, CardBody, CardImg, CardText, CardTitle, Col, Row } from 'reactstrap';
 
-export function MovieCard({id, imgSrc, title, description}) {
+export function MovieCard({id, imgUrl, title, description}) {
   return <Card id={id}>
-      <CardImg top width="100%" src={imgSrc} />
+      <CardImg top width="100%" src={imgUrl} />
     <CardBody>
       <CardTitle tag='h5'>{title}</CardTitle>
       <CardText>{description}</CardText>
