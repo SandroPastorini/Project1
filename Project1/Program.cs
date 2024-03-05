@@ -7,10 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddControllers();
-builder.Configuration
-    .SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("C:\\Users\\sandr\\AppData\\Roaming\\Microsoft\\UserSecrets\\3fcc5d80-0612-4514-a4b2-88dfdcdfa092\\secrets.json");
+/*builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("C:\\Users\\sandr\\AppData\\Roaming\\Microsoft\\UserSecrets\\3fcc5d80-0612-4514-a4b2-88dfdcdfa092\\secrets.json");*/
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseNpgsql(builder.Configuration.GetConnectionString("taller-postgres-connection")));
+        options.UseSqlServer(builder.Configuration.GetConnectionString(builder.Configuration.GetConnectionString("BloggingDatabase"))));
 
 
 var app = builder.Build();

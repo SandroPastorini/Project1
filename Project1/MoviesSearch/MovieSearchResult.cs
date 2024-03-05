@@ -2,12 +2,12 @@
 {
     public class MovieSearchResult
     {
-        public UInt16 resultCount { get; set; }
-        public IList<MovieSearchResultItem> results { get; set; }
+        public int ResultCount { get; set; }
+        public IList<MovieSearchResultItem> Results { get; set; }
 
-        public MovieSearchResult(UInt16 resultCount, IList<MovieSearchResultItem> results) {
-            this.resultCount = resultCount;
-            this.results = results;
+        public MovieSearchResult(int resultCount, IList<MovieSearchResultItem> results) {
+            this.ResultCount = resultCount;
+            this.Results = results;
         }
     }
 }
